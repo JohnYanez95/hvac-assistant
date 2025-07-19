@@ -1,0 +1,116 @@
+# HVAC Assistant specific files
+*.pdf
+!sample_*.pdf
+nul
+*.tmp
+
+# Data files
+*.txt
+!requirements.txt
+!README.txt
+*.gif
+*.GIF
+
+# Generated content
+data/raw_pdfs/
+data/processed_texts/
+embeddings/
+temp/
+export/
+
+# Logs
+*.log
+*.logs
+logs/
+log/
+*.out
+*.err
+
+# DataBricks logs
+driver-logs/
+executor-logs/
+eventlog/
+
+# Spark logs
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Delta Lake tables
+delta-table/
+**/delta-table/
+*.delta
+_delta_log/
+**/_delta_log/
+
+# Common data formats (downloaded/processed data)
+*.csv
+*.parquet
+*.json
+*.xlsx
+*.xls
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# DataBricks
+.databricks/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Large files and directories
+raw_data/
+processed_data/
+
+# Vector database files
+*.faiss
+*.index
+chromadb/
+
+# Model cache
+.cache/
+transformers_cache/
+torch_cache/
+
+# Docker
+.dockerignore
