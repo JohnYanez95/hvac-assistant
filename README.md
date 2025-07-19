@@ -27,23 +27,33 @@ hvac-assistant/
 │   ├── parse_and_chunk.py # PDF parsing and text chunking
 │   ├── generate_embeddings.py # Embedding generation and storage
 │   └── query_pipeline.py  # LangChain retrieval pipeline
+├── utils/
+│   ├── __init__.py        # Package initialization
+│   ├── config_loader.py   # Configuration management
+│   └── spark_utils.py     # PySpark session utilities
 ├── embeddings/
 │   └── faiss_index/       # FAISS vector database storage
+├── logs/                  # Application logs
+├── temp/                  # Temporary processing files
+├── config.yaml           # Configuration settings
+├── requirements.txt      # Python dependencies
 ├── Dockerfile
 ├── docker-compose.yml
-├── requirements.txt
+├── CLAUDE.md             # Development context
 └── TODO.md               # Development roadmap
 ```
 
 ## Technology Stack
 
-- **Language**: Python 3.11+
+- **Language**: Python 3.10+ (leveraging existing PySpark environment)
+- **Data Processing**: PySpark 3.5.2 + Delta Lake for distributed processing
 - **ML Framework**: LangChain
 - **Embeddings**: SentenceTransformers (all-MiniLM-L6-v2 recommended)
-- **Vector DB**: FAISS or ChromaDB
+- **Vector DB**: FAISS (primary) or ChromaDB
 - **Containerization**: Docker & Docker Compose
-- **PDF Processing**: PyPDF2/pdfplumber
+- **PDF Processing**: pdfplumber + PySpark for parallel processing
 - **Web Scraping**: requests, BeautifulSoup4
+- **Configuration**: YAML-based with environment-specific settings
 
 ## Quick Start
 

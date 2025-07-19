@@ -60,6 +60,15 @@ python scripts/query_pipeline.py
 python scripts/query_pipeline.py --query "What is the BTU rating for furnace model XYZ?"
 ```
 
+### Documentation Commands
+```bash
+# Review all markdown files
+cat *.md
+
+# Review specific documentation
+cat README.md TODO.md CLAUDE.md
+```
+
 ### Development Guidelines
 - Use type hints throughout the codebase
 - Follow PEP 8 style guidelines
