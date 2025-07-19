@@ -58,10 +58,15 @@ hvac-assistant/
 ## Quick Start
 
 1. Clone the repository
-2. Build and run with Docker Compose:
+2. Set up your environment (see [Docker Learning Guide](learnings/docker-guide.md) for containerized deployment)
+3. Build and run with Docker Compose:
    ```bash
    docker-compose up --build
    ```
+
+## Learning Resources
+
+- **[Docker Guide](learnings/docker-guide.md)** - Complete Docker setup and learning path for this project
 
 ## Future Roadmap
 

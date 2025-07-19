@@ -1,6 +1,7 @@
 # HVAC Assistant specific files
 *.pdf
 !sample_*.pdf
+!research/*.pdf
 nul
 *.tmp
 
