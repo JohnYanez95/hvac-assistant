@@ -45,8 +45,8 @@ hvac-assistant/
 
 ## Technology Stack
 
-- **Language**: Python 3.10+ (leveraging existing PySpark environment)
-- **Data Processing**: PySpark 3.5.2 + Delta Lake for distributed processing
+- **Language**: Python 3.10.9 (leveraging existing PySpark environment)
+- **Data Processing**: PySpark 3.5.2 + Delta Lake + Hadoop 3.3.5 + Java JDK 19
 - **ML Framework**: LangChain
 - **Embeddings**: SentenceTransformers (all-MiniLM-L6-v2 recommended)
 - **Vector DB**: FAISS (primary) or ChromaDB

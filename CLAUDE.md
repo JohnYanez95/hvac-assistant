@@ -4,13 +4,40 @@
 This is an NLP project using LangChain and Docker to create a locally deployable assistant for answering technical questions about HVAC furnace models. The system uses retrieval-augmented generation (RAG) with scraped PDF manuals.
 
 ## Technology Stack
-- **Language**: Python 3.11+
+- **Language**: Python 3.10.9
+- **Big Data**: PySpark 3.5.2 + Hadoop 3.3.5 + Java JDK 19
 - **ML Framework**: LangChain
 - **Embeddings**: SentenceTransformers (all-MiniLM-L6-v2)
 - **Vector DB**: FAISS (primary) or ChromaDB
 - **Containerization**: Docker & Docker Compose
 - **PDF Processing**: pdfplumber
 - **Web Scraping**: requests, BeautifulSoup4
+
+## Environment Setup Prerequisites
+
+### Core Dependencies (Required)
+- **Python 3.10.9**: Download from [python.org](https://www.python.org/downloads/release/python-3109/)
+- **Java JDK 19**: Download from [Oracle JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) or [OpenJDK](https://jdk.java.net/archive/)
+- **Apache Hadoop 3.3.5**: Download from [Apache Hadoop](https://hadoop.apache.org/releases.html)
+- **Apache Spark 3.5.2**: Included with PySpark installation via pip
+
+### Environment Variables (Windows)
+```cmd
+set JAVA_HOME=C:\Program Files\Java\jdk-19
+set HADOOP_HOME=C:\hadoop\hadoop-3.3.5
+set PYSPARK_HOME=C:\Users\%USERNAME%\spark\spark-3.5.2-bin-hadoop3
+set SPARK_HOME=C:\Users\%USERNAME%\spark\spark-3.5.2-bin-hadoop3
+```
+
+### Path Configuration
+Add to Windows PATH:
+- %JAVA_HOME%\bin
+- %HADOOP_HOME%\bin
+- %SPARK_HOME%\bin
+
+### Optional Tools
+- **Docker Desktop**: [Download for Windows](https://www.docker.com/products/docker-desktop/)
+- **Git**: [Download for Windows](https://git-scm.com/download/win)
 
 ## Project Structure
 ```
