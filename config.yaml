@@ -1,0 +1,99 @@
+spark:
+  executor_memory: "16g"
+  driver_memory: "32g"
+  shuffle_partitions: 216
+  local_threads: 6
+  log_level: "WARN"
+
+scraping:
+  # Rate limiting and politeness
+  delay_between_requests: 1.0
+  max_retries: 3
+  timeout: 30.0
+  user_agent: "HVAC-Assistant/1.0 (+research-purposes)"
+  
+  # Target manufacturer domains
+  target_domains:
+    - "carrier.com"
+    - "lennox.com" 
+    - "trane.com"
+    - "goodman-mfg.com"
+    - "rheem.com"
+    - "york.com"
+  
+  # File patterns to look for
+  pdf_patterns:
+    - "manual"
+    - "installation"
+    - "service"
+    - "specification"
+    - "datasheet"
+
+pdf_processing:
+  # Text extraction settings
+  chunk_size: 1000
+  chunk_overlap: 200
+  min_chunk_length: 100
+  
+  # Text cleaning
+  remove_headers_footers: true
+  normalize_whitespace: true
+  remove_page_numbers: true
+  
+  # Batch processing
+  batch_size: 50
+  parallel_workers: 4
+
+embeddings:
+  # Model configuration
+  model_name: "all-MiniLM-L6-v2"
+  device: "cpu"
+  batch_size: 32
+  normalize_embeddings: true
+  
+  # Vector database
+  vector_db: "faiss"  # or "chromadb"
+  index_type: "IndexFlatIP"  # Inner Product for normalized embeddings
+  
+  # Performance
+  enable_multiprocessing: true
+  max_workers: 4
+
+retrieval:
+  # Search parameters
+  top_k: 5
+  score_threshold: 0.7
+  
+  # Query processing
+  max_query_length: 512
+  query_expansion: false
+  
+  # Response generation
+  max_context_length: 4000
+  temperature: 0.1
+
+paths:
+  # Data directories
+  data_base: "./data"
+  raw_pdfs: "./data/raw_pdfs"
+  processed_texts: "./data/processed_texts"
+  embeddings_base: "./embeddings"
+  faiss_index: "./embeddings/faiss_index"
+  chromadb_path: "./embeddings/chromadb"
+  
+  # Metadata and logs
+  metadata_path: "./data/metadata.json"
+  processing_logs: "./logs"
+  
+  # Temporary processing
+  temp_dir: "./temp"
+  
+  # Export/output
+  export_dir: "./export"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_rotation: true
+  max_file_size: "10MB"
+  backup_count: 5

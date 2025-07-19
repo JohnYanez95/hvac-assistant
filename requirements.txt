@@ -1,0 +1,46 @@
+# Core PySpark & Data Processing (from your existing setup)
+pyspark==3.5.2
+delta-spark==3.2.0
+pandas==1.5.3
+numpy==1.23.5
+pyarrow==11.0.0
+
+# Configuration & Utilities
+PyYAML==6.0.2
+python-dateutil==2.9.0.post0
+
+# Web Scraping & PDF Processing
+requests==2.32.3
+beautifulsoup4==4.12.3
+urllib3==2.3.0
+pdfplumber>=0.9.0
+PyPDF2>=3.0.1
+
+# NLP & Embeddings
+langchain>=0.1.0
+langchain-community>=0.0.20
+sentence-transformers>=2.2.2
+transformers>=4.35.0
+torch>=2.0.0
+
+# Vector Databases
+faiss-cpu>=1.7.4
+chromadb>=0.4.15
+
+# Development & Testing
+pytest>=7.4.0
+black>=24.10.0
+jupyter>=1.1.1
+jupyterlab>=4.3.4
+
+# Logging & Monitoring
+tqdm>=4.67.1
+
+# Optional: Future Streamlit UI
+# streamlit>=1.28.0
+# plotly>=5.17.0
+
+# System Dependencies
+certifi>=2024.12.14
+charset-normalizer>=3.4.1
+idna>=3.10
