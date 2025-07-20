@@ -213,37 +213,37 @@ Ubuntu 22.04 may come with Node.js v12.22.9 pre-installed or easily installed vi
 
 ### Troubleshooting Node.js Installation Issues
 
-**Problem: Package Conflicts When Upgrading Node.js**
+**Problem: Package Conflicts When Installing Node.js**
 
-If you accidentally installed Ubuntu's old Node.js first and then tried to upgrade, you might see errors like:
+**⚠️ The Problem:**
+You tried to install nodejs and npm via apt, but encountered broken dependencies and conflicts:
+- nodejs and npm from Ubuntu's default repos are outdated and incompatible
+- npm depends on node-* packages that were not installable
+- nodejs and npm also conflicted with each other due to versioning issues and Ubuntu's packaging scheme
+
+**Symptoms:**
 ```
 dpkg: error processing archive ... trying to overwrite '/usr/include/node/common.gypi', 
 which is also in package libnode-dev
 ```
 
-**Symptoms:**
-- Ubuntu 22.04 has Node.js v12.22.9 available (pre-installed or via `apt install nodejs npm`)
-- Attempted to upgrade to Node.js v18+ for Claude Code compatibility
-- Got package conflict errors during installation
-
-**Solution: Clean Removal and Reinstall**
+**✅ The Fix: Complete Clean Removal and Proper Installation**
 ```bash
-# Step 1: Remove all Node.js related packages
-sudo apt remove --purge nodejs npm libnode-dev libnode72 nodejs-doc
-sudo apt autoremove
+# Step 1: Fully remove all conflicting packages and configs
+sudo apt purge -y nodejs npm        # Fully removed old versions and configs
+sudo apt autoremove -y              # Cleared leftover dependencies
+sudo apt clean                      # Wiped cached .deb files
+sudo apt update --fix-missing       # Fixed the apt index in case of corrupt or missing packages
 
-# Step 2: Clear package cache
-sudo apt autoclean
+# Step 2: Install Node.js the proper way via NodeSource
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
 
-# Step 3: Install Node.js properly from NodeSource
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# Step 4: Verify installation
-node --version  # Should show v18+ or v20+
+# Step 3: Verify installation
+node --version  # Should show v20+
 npm --version
 
-# Step 5: Configure npm and install Claude Code
+# Step 4: Configure npm and install Claude Code
 mkdir -p ~/.npm-global
 npm config set prefix ~/.npm-global
 echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
