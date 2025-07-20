@@ -64,17 +64,45 @@ hvac-assistant/
 
 ## Quick Start
 
+### For Windows Users (Recommended)
+
+**WSL2 Development Environment:**
+1. Follow the **[WSL2 Setup Guide](learnings/wsl-guide.md)** for the complete development environment used by this project
+2. This guide covers:
+   - WSL2 installation and configuration
+   - Python 3.10, Java JDK 19, Hadoop 3.3.5, and PySpark 3.5.2 setup
+   - Docker integration options
+   - Claude Code installation for WSL development
+   - VS Code WSL integration
+   - Comprehensive Linux command reference for Windows users
+
+### Alternative Setup Methods
+
+**Traditional Setup:**
 1. Clone the repository
-2. Set up your environment (see [Docker Learning Guide](learnings/docker-guide.md) for containerized deployment)
+2. Set up your environment manually or use [Docker Learning Guide](learnings/docker-guide.md) for containerized deployment
 3. Complete legal compliance research (in progress)
 4. Build and run with Docker Compose:
    ```bash
    docker-compose up --build
    ```
 
+## Development Environment
+
+This project is actively developed using:
+- **WSL2 (Ubuntu 22.04)** on Windows
+- **Python 3.10.12** in virtual environments
+- **Java JDK 19** + **Hadoop 3.3.5** + **PySpark 3.5.2**
+- **Docker Desktop** with WSL2 integration
+- **VS Code** with WSL extension
+- **Claude Code** for AI-assisted development
+
+For the exact setup used during development, follow the [WSL2 Setup Guide](learnings/wsl-guide.md).
+
 ## Learning Resources
 
-- **[Docker Guide](learnings/docker-guide.md)** - Complete Docker setup and learning path for this project
+- **[WSL2 Setup Guide](learnings/wsl-guide.md)** - Complete Windows development environment setup (recommended)
+- **[Docker Guide](learnings/docker-guide.md)** - Docker fundamentals and containerized deployment
 
 ## Future Roadmap
 
