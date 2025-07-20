@@ -15,6 +15,83 @@ This is an NLP project using LangChain and Docker to create a locally deployable
 
 ## Environment Setup Prerequisites
 
+### Recommended: WSL2 Setup (Windows Users)
+For the best development experience on Windows, use WSL2 (Windows Subsystem for Linux):
+
+**Initial Setup:**
+```cmd
+# In PowerShell (as Administrator)
+wsl --install Ubuntu-22.04
+wsl --set-default-version 2
+```
+
+**Important WSL Nuances:**
+- After installation, create a UNIX username (doesn't need to match Windows username)
+- WSL may start in Windows directories (`/mnt/c/...`) - use `cd ~` to get to Linux home
+- Start WSL properly with `wsl ~` (not just `wsl`) to begin in home directory
+- Use Windows Terminal for better WSL integration
+- Git is pre-installed in Ubuntu 22.04
+- Multi-line command pasting works seamlessly
+
+**WSL Environment Setup:**
+```bash
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Python 3.10 (if not already installed)
+sudo apt install -y software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install -y python3.10 python3.10-venv python3.10-dev python3-pip
+
+# Install Java JDK 19
+sudo mkdir -p /opt/java
+cd /tmp
+wget https://download.oracle.com/java/19/archive/jdk-19.0.2_linux-x64_bin.tar.gz
+sudo tar -xzf jdk-19.0.2_linux-x64_bin.tar.gz -C /opt/java/
+sudo ln -sf /opt/java/jdk-19.0.2 /opt/java/current
+
+# Install Hadoop 3.3.5
+sudo mkdir -p /opt/hadoop
+wget https://archive.apache.org/dist/hadoop/common/hadoop-3.3.5/hadoop-3.3.5.tar.gz
+sudo tar -xzf hadoop-3.3.5.tar.gz -C /opt/hadoop/
+sudo ln -sf /opt/hadoop/hadoop-3.3.5 /opt/hadoop/current
+
+# Configure environment variables
+# Note: ~/.bashrc is your shell configuration file that runs every time you open a terminal
+# The >> operator appends these export commands to make variables persistent across sessions
+echo 'export JAVA_HOME=/opt/java/current' >> ~/.bashrc
+echo 'export HADOOP_HOME=/opt/hadoop/current' >> ~/.bashrc
+echo 'export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin' >> ~/.bashrc
+source ~/.bashrc  # Reload the configuration to apply changes immediately
+
+# Clean up downloads
+rm /tmp/*.tar.gz
+
+# Configure git (if not already done)
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+git config --global init.defaultBranch main
+
+# Create Repos directory and clone project
+mkdir -p ~/Repos
+cd ~/Repos
+git clone https://github.com/JohnYanez95/hvac-assistant.git
+
+# Install Docker
+# curl downloads the Docker install script (-f=fail on errors, -s=silent, -S=show errors, -L=follow redirects)
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+# usermod adds your user to docker group (-a=append, -G=group, $USER=your username)
+sudo usermod -aG docker $USER
+
+# Important: Exit and restart WSL to apply group changes
+# exit
+# wsl ~
+# docker --version
+```
+
+### Alternative: Native Windows Setup
+
 ### Core Dependencies (Required)
 - **Python 3.10.9**: Download from [python.org](https://www.python.org/downloads/release/python-3109/)
 - **Java JDK 19**: Download from [Oracle JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) or [OpenJDK](https://jdk.java.net/archive/)
@@ -134,3 +211,6 @@ cat README.md TODO.md CLAUDE.md
 - Implement incremental updates for new PDFs
 - Focus on modular, maintainable code
 - Plan for Streamlit UI integration
+
+## Claude's Memories
+- Let's add that information in as well.
