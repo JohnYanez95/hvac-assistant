@@ -101,16 +101,45 @@ source ~/.bashrc  # Reload the configuration to apply changes immediately
 rm /tmp/*.tar.gz
 ```
 
-### 6. Configure Git
+### 6. Configure Git and GitHub Authentication
 
 ```bash
 # Configure git (replace with your information)
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 git config --global init.defaultBranch main
+
+# Optional: Cache credentials so you don't retype token every time
+git config --global credential.helper store
 ```
 
 **Note**: Git comes pre-installed with Ubuntu 22.04
+
+#### GitHub Authentication Setup
+
+**GitHub no longer accepts passwords** - you need a Personal Access Token (PAT):
+
+1. **Create PAT on GitHub.com**:
+   - Profile picture → Settings → Developer settings
+   - Personal access tokens → Tokens (classic) → Generate new token
+   - **Name**: `General Git Access` (or any name you prefer)
+   - **Expiration**: 90 days or 1 year
+   - **Scopes**: Check `repo` (covers all repository operations)
+   - Copy and save the token securely
+
+2. **Use PAT when Git prompts**:
+   ```bash
+   git push
+   # Username: YourGitHubUsername
+   # Password: <paste your PAT token here>
+   ```
+
+3. **Credential Caching** (Optional):
+   - If you ran `git config --global credential.helper store`, Git will save your PAT after first use
+   - You'll only need to enter the PAT once - Git remembers it for future operations
+   - Without caching, you'll need to enter the PAT every time you push/pull
+
+4. **Important**: The PAT replaces your password everywhere Git asks for authentication
 
 ### 7. Clone Project and Setup Virtual Environment
 
