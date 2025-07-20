@@ -163,6 +163,114 @@ exit
 
 **Note**: Most Windows developers (~80%) use Docker Desktop with WSL integration for the best experience. Choose Docker Engine only if you prefer a pure CLI workflow or have specific requirements.
 
+## Installing Claude Code in WSL
+
+### Node.js Setup (Required for Claude Code)
+
+**⚠️ Important for All Users**: Ubuntu 22.04 comes with Node.js v12.22.9, which is incompatible with Claude Code (requires v18+). You will need to replace Ubuntu's Node.js with a current version. This process may involve package conflicts that require cleanup - this is normal and expected.
+
+**If you already have Node.js installed**, you'll likely need to remove it first (see Troubleshooting section below).
+
+**Option A: NodeSource Repository (Recommended)**
+```bash
+# Install current Node.js LTS version
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Configure npm global directory
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# Install Claude Code
+npm install -g @anthropic-ai/claude-code
+```
+
+**Option B: Snap Package (Simpler)**
+```bash
+# Install Node.js via snap
+sudo snap install node --classic
+
+# Configure npm global directory
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# Install Claude Code
+npm install -g @anthropic-ai/claude-code
+```
+
+**Verify Installation:**
+```bash
+node --version  # Should show v18+ or v20+
+claude --version
+```
+
+**Important Note About Ubuntu's Default Node.js:**
+Ubuntu 22.04 may come with Node.js v12.22.9 pre-installed or easily installed via `apt`. This version is incompatible with Claude Code (requires v18+). You'll need to replace it with a current version.
+
+### Troubleshooting Node.js Installation Issues
+
+**Problem: Package Conflicts When Upgrading Node.js**
+
+If you accidentally installed Ubuntu's old Node.js first and then tried to upgrade, you might see errors like:
+```
+dpkg: error processing archive ... trying to overwrite '/usr/include/node/common.gypi', 
+which is also in package libnode-dev
+```
+
+**Symptoms:**
+- Ubuntu 22.04 has Node.js v12.22.9 available (pre-installed or via `apt install nodejs npm`)
+- Attempted to upgrade to Node.js v18+ for Claude Code compatibility
+- Got package conflict errors during installation
+
+**Solution: Clean Removal and Reinstall**
+```bash
+# Step 1: Remove all Node.js related packages
+sudo apt remove --purge nodejs npm libnode-dev libnode72 nodejs-doc
+sudo apt autoremove
+
+# Step 2: Clear package cache
+sudo apt autoclean
+
+# Step 3: Install Node.js properly from NodeSource
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Step 4: Verify installation
+node --version  # Should show v18+ or v20+
+npm --version
+
+# Step 5: Configure npm and install Claude Code
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+npm install -g @anthropic-ai/claude-code
+```
+
+**Alternative: Use Snap (If NodeSource Still Fails)**
+```bash
+# Complete removal of all Node.js packages
+sudo apt remove --purge nodejs* npm* libnode*
+sudo apt autoremove
+
+# Install via snap (isolated, no conflicts)
+sudo snap install node --classic
+
+# Configure and install Claude Code
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+npm install -g @anthropic-ai/claude-code
+```
+
+**Prevention:**
+Always check software version requirements before installation and use the appropriate package source from the start.
+
 ## VS Code Integration
 
 ### Setup VS Code with WSL
