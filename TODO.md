@@ -9,8 +9,14 @@
 - [ ] Initialize git repository with proper .gitignore
 
 ### 2. Data Collection & Processing
+- [ ] **Legal Compliance Research** (In Progress)
+  - [ ] Research legal compliance for manufacturer list: Carrier, Goodman, Trane, Amana, American Standard, Fuji, Rheem, York, Daikin, Heil, Bryant, Coleman, Lennox
+  - [ ] Review robots.txt and Terms of Service for each manufacturer
+  - [ ] Document compliant scraping approach per manufacturer
+  - [ ] Identify manufacturers with public documentation access
+
 - [ ] Implement PDF scraping script (`scripts/scrape_pdfs.py`)
-  - [ ] Identify target HVAC manufacturer websites
+  - [ ] Identify target HVAC manufacturer websites (pending legal research)
   - [ ] Implement robust scraping with rate limiting
   - [ ] Add error handling and retry logic
   - [ ] Save PDFs to `data/raw_pdfs/`

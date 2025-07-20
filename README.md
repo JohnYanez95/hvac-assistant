@@ -8,7 +8,8 @@ This project creates a locally deployable assistant capable of answering technic
 
 ## Features
 
-- **PDF Scraping**: Automated collection of HVAC furnace PDFs from manufacturer websites
+- **Legal-Compliant PDF Collection**: Automated collection of HVAC furnace PDFs from manufacturer websites with full legal compliance review
+- **Multi-Manufacturer Support**: Targeting 14+ major HVAC manufacturers (Carrier, Goodman, Trane, Amana, American Standard, Fuji, Rheem, York, Daikin, Heil, Bryant, Coleman, Lennox, and more)
 - **Document Processing**: Parse PDFs into plain text and chunk appropriately for embedding
 - **Local Embeddings**: Use open-source embedding models (SentenceTransformers) for semantic search
 - **Vector Database**: Store embeddings in local FAISS or ChromaDB for fast retrieval
@@ -55,11 +56,18 @@ hvac-assistant/
 - **Web Scraping**: requests, BeautifulSoup4
 - **Configuration**: YAML-based with environment-specific settings
 
+## Current Status
+
+**Phase**: Legal compliance research and Docker learning  
+**Status**: Researching legal compliance for 14+ HVAC manufacturers before implementation  
+**Next Steps**: Complete Docker learning path, finalize compliant manufacturer list, begin core infrastructure
+
 ## Quick Start
 
 1. Clone the repository
 2. Set up your environment (see [Docker Learning Guide](learnings/docker-guide.md) for containerized deployment)
-3. Build and run with Docker Compose:
+3. Complete legal compliance research (in progress)
+4. Build and run with Docker Compose:
    ```bash
    docker-compose up --build
    ```

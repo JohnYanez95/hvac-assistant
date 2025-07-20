@@ -58,6 +58,17 @@ hvac-assistant/
 └── TODO.md
 ```
 
+## Current Development Status
+
+### Legal Compliance Research (In Progress)
+**Target Manufacturers**: Carrier, Goodman, Trane, Amana, American Standard, Fuji, Rheem, York, Daikin, Heil, Bryant, Coleman, Lennox
+**Status**: Researching robots.txt, Terms of Service, and public documentation access for each manufacturer
+**Approach**: Prioritize manufacturers with clearly public documentation libraries
+
+### Learning Phase
+**Docker**: Following structured learning path in `learnings/docker-guide.md`
+**Next**: Complete Docker fundamentals before implementation
+
 ## Development Commands
 
 ### Environment Setup
@@ -70,7 +81,7 @@ venv\Scripts\activate     # Windows
 # Install dependencies
 pip install -r requirements.txt
 
-# Docker commands
+# Docker commands (after learning Docker)
 docker-compose up --build
 docker-compose down
 ```
