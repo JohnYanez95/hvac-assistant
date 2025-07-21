@@ -139,7 +139,19 @@ git config --global credential.helper store
    - You'll only need to enter the PAT once - Git remembers it for future operations
    - Without caching, you'll need to enter the PAT every time you push/pull
 
-4. **Important**: The PAT replaces your password everywhere Git asks for authentication
+4. **VPN Considerations**:
+   - GitHub may prompt for credentials again if you toggle VPN on/off due to IP address changes
+   - This is a security feature - GitHub notices location changes and re-verifies identity
+   - Keep VPN status consistent (always on or always off) to avoid repeated prompts
+   - Credential caching still works - it's just GitHub being cautious about security
+
+5. **Credential Storage & Retrieval**:
+   - Cached credentials are stored in `~/.git-credentials` (readable only by you)
+   - To view your cached PAT: `cat ~/.git-credentials` (shows format: `https://username:token@github.com`)
+   - If you forget your PAT and need to re-enter it, just run any git command that requires auth
+   - Never share or commit this file - it contains your authentication token
+
+6. **Important**: The PAT replaces your password everywhere Git asks for authentication
 
 ### 7. Clone Project and Setup Virtual Environment
 
@@ -236,6 +248,31 @@ npm install -g @anthropic-ai/claude-code
 node --version  # Should show v18+ or v20+
 claude --version
 ```
+
+### VPN and Claude Code Connectivity Issues
+
+**Problem**: Claude Code shows "offline mode" when VPN is active
+
+**Solution**: Configure VPN split tunneling to bypass VPN for Claude Code components:
+
+**For NordVPN (and similar VPN clients):**
+1. **Enable Split Tunneling** in VPN settings
+2. **Select "Bypass VPN for selected apps"** (not "Use VPN for selected apps")
+3. **Add these applications**:
+   - `powershell.exe` (`C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`)
+   - `wsl.exe` (`C:\Windows\System32\wsl.exe`)
+
+**Why this works:**
+- PowerShell launches WSL, which runs Claude Code (Node.js)
+- WSL handles all internal networking for processes inside it
+- Adding these two Windows executables covers the entire chain
+
+**Test procedure:**
+1. Configure VPN split tunneling as above
+2. **Close PowerShell completely** and open a new one
+3. Run `wsl ~` (fresh WSL session picks up new network rules)
+4. Test: `claude --version`
+5. Test: `claude` (interactive mode should connect, not show offline)
 
 **Important Note About Ubuntu's Default Node.js:**
 Ubuntu 22.04 may come with Node.js v12.22.9 pre-installed or easily installed via `apt`. This version is incompatible with Claude Code (requires v18+). You'll need to replace it with a current version.
