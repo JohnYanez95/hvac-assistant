@@ -145,7 +145,11 @@ Docker Desktop is preferred for Windows developers because:
 2. In Docker Desktop settings, go to **Resources** → **WSL Integration**
 3. Enable integration with Ubuntu-22.04
 4. Apply & Restart Docker Desktop
-5. Test in WSL: `docker --version`
+5. Restart WSL session: `exit` then `wsl ~`
+6. Test in WSL: `docker --version`
+
+**Container Access from Windows Browser:**
+When running containers in WSL, use `http://127.0.0.1:PORT` instead of `http://localhost:PORT` to access them from Windows browsers. The `localhost` resolution sometimes fails in the WSL-Windows bridge, while `127.0.0.1` works reliably.
 
 ---
 

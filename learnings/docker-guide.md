@@ -135,3 +135,7 @@ Docker will **complement** (not replace) your existing PySpark setup:
 - **Development**: Use your local Python 3.10.9 + PySpark 3.5.2 + Java 19
 - **Deployment**: Use Docker containers for consistent environments
 - **Testing**: Use containers to validate cross-platform compatibility
+
+## WSL-Specific Notes
+
+**Container Access from Windows**: When running containers in WSL2, access them from Windows browsers using `http://127.0.0.1:PORT` instead of `http://localhost:PORT`. The `localhost` DNS resolution can be unreliable in the WSL-Windows bridge.
