@@ -99,6 +99,30 @@ This project is actively developed using:
 
 For the exact setup used during development, follow the [WSL2 Setup Guide](learnings/wsl-guide.md).
 
+## Environment Verification
+
+After completing your setup, verify your PySpark environment is working correctly:
+
+```bash
+# Activate virtual environment
+source venv/bin/activate
+
+# Install project dependencies
+pip install -r requirements.txt
+
+# Run PySpark environment test
+python3 tests/test_pyspark.py
+```
+
+The test script validates:
+- Python 3.10.x compatibility
+- Java/Hadoop environment variables
+- PySpark 3.5.2 installation and functionality
+- DataFrame operations with sample HVAC data
+- Spark session management
+
+**Expected Output:** All 5 tests should pass with "🎉 All tests passed! PySpark environment is ready for HVAC Assistant development."
+
 ## Learning Resources
 
 - **[WSL2 Setup Guide](learnings/wsl-guide.md)** - Complete Windows development environment setup (recommended)
