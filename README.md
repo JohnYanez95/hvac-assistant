@@ -76,13 +76,164 @@ hvac-assistant/
    - VS Code WSL integration
    - Comprehensive Linux command reference for Windows users
 
+### Native Windows Setup
+
+**Step-by-Step Windows Installation:**
+
+#### 1. Python 3.10.9 Installation
+1. Download Python 3.10.9 from [python.org](https://www.python.org/downloads/release/python-3109/)
+2. During installation:
+   - Check "Add Python 3.10 to PATH"
+   - Choose "Customize installation"
+   - Check "Add Python to environment variables"
+3. Verify: Open Command Prompt and run `python --version`
+
+#### 2. Java JDK 19 Installation
+1. Download Java JDK 19 from [Oracle Archive](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html)
+   - Choose: Windows x64 Installer (jdk-19_windows-x64_bin.exe)
+   - Alternative: [OpenJDK 19](https://jdk.java.net/archive/) for open-source option
+2. Install to default location: `C:\Program Files\Java\jdk-19`
+3. Set environment variables (see Environment Variables section below)
+
+#### 3. Apache Hadoop 3.3.5 Installation
+1. Download Hadoop 3.3.5 from [Apache Archive](https://archive.apache.org/dist/hadoop/common/hadoop-3.3.5/)
+   - File: `hadoop-3.3.5.tar.gz`
+2. Extract to `C:\hadoop\` (final path: `C:\hadoop\hadoop-3.3.5`)
+3. Download Windows utilities for Hadoop:
+   - Get winutils.exe from [steveloughran/winutils](https://github.com/steveloughran/winutils/tree/master/hadoop-3.0.0/bin)
+   - Place in `C:\hadoop\hadoop-3.3.5\bin\`
+4. Set environment variables (see below)
+
+#### 4. PySpark 3.5.2 Installation
+
+**Important: Choose ONE of these approaches based on your needs:**
+
+**Option A: Virtual Environment Installation (Recommended)**
+```cmd
+# Skip global PySpark installation
+# Install PySpark later in your project's virtual environment
+# This avoids version conflicts between projects
+```
+
+**Option B: Global Installation (For system-wide PySpark)**
+```cmd
+# Install globally ONLY if you need PySpark available system-wide
+pip install pyspark==3.5.2
+```
+
+**Note**: If you choose Option A (recommended), you'll install PySpark in your virtual environment during project setup (Step 7)
+
+#### 5. Environment Variables Configuration
+
+**Method 1: System Properties GUI**
+1. Right-click "This PC" → Properties → Advanced system settings
+2. Click "Environment Variables"
+3. Under "System variables", add these NEW variables:
+
+| Variable | Value |
+|----------|-------|
+| `JAVA_HOME` | `C:\Program Files\Java\jdk-19` |
+| `HADOOP_HOME` | `C:\hadoop\hadoop-3.3.5` |
+| `PYSPARK_PYTHON` | `python` |
+| `HADOOP_COMMON_LIB_NATIVE_DIR` | `%HADOOP_HOME%\lib\native` |
+
+**Note about SPARK_HOME:**
+- **If using virtual environments (Option A)**: Do NOT set SPARK_HOME globally
+- **If using global PySpark (Option B)**: Set `SPARK_HOME` to `%USERPROFILE%\AppData\Local\Programs\Python\Python310\Lib\site-packages\pyspark`
+
+4. Edit the `Path` variable and ADD these entries:
+   - `%JAVA_HOME%\bin`
+   - `%HADOOP_HOME%\bin`
+   - `%HADOOP_HOME%\sbin`
+   - `%SPARK_HOME%\bin` (Only if using global PySpark - Option B)
+
+**Method 2: Command Line (Run as Administrator)**
+
+**For Virtual Environment Setup (Option A - Recommended):**
+```cmd
+# Set Java environment
+setx JAVA_HOME "C:\Program Files\Java\jdk-19" /M
+setx PATH "%PATH%;%JAVA_HOME%\bin" /M
+
+# Set Hadoop environment
+setx HADOOP_HOME "C:\hadoop\hadoop-3.3.5" /M
+setx HADOOP_COMMON_LIB_NATIVE_DIR "%HADOOP_HOME%\lib\native" /M
+setx PATH "%PATH%;%HADOOP_HOME%\bin;%HADOOP_HOME%\sbin" /M
+
+# Set PySpark Python
+setx PYSPARK_PYTHON "python" /M
+```
+
+**For Global PySpark Setup (Option B):**
+```cmd
+# Run all commands from Option A above, then add:
+setx SPARK_HOME "%USERPROFILE%\AppData\Local\Programs\Python\Python310\Lib\site-packages\pyspark" /M
+setx PATH "%PATH%;%SPARK_HOME%\bin" /M
+```
+
+**Important**: After setting environment variables, close and reopen Command Prompt/PowerShell
+
+#### 6. Verification
+Open a new Command Prompt and verify each component:
+
+```cmd
+# Java verification
+java -version
+# Expected: openjdk version "19.0.2" or java version "19.0.2"
+
+# Hadoop verification
+hadoop version
+# Expected: Hadoop 3.3.5
+
+# Python verification
+python --version
+# Expected: Python 3.10.9
+
+# PySpark verification (skip if using Option A - venv approach)
+python -c "import pyspark; print(pyspark.__version__)"
+# Expected: 3.5.2 (only if globally installed)
+
+# Test PySpark functionality (skip if using Option A - venv approach)
+pyspark
+# Expected: Spark shell should start without errors
+
+# Note: For Option A users, PySpark verification happens after venv activation in Step 7
+```
+
+#### 7. Project Setup
+```cmd
+# Clone repository
+git clone https://github.com/JohnYanez95/hvac-assistant.git
+cd hvac-assistant
+
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+venv\Scripts\activate
+
+# IMPORTANT: If you chose Option A (virtual environment approach)
+# Install PySpark in the virtual environment now
+pip install pyspark==3.5.2
+
+# Install all project dependencies
+pip install -r requirements.txt
+
+# Run environment test
+python tests\test_pyspark.py
+```
+
+**Virtual Environment Benefits:**
+- Isolated PySpark version per project
+- No conflicts with other Python projects
+- SPARK_HOME automatically set within venv
+- PySpark finds Java/Hadoop through JAVA_HOME and HADOOP_HOME
+
 ### Alternative Setup Methods
 
-**Traditional Setup:**
-1. Clone the repository
-2. Set up your environment manually or use [Docker Learning Guide](learnings/docker-guide.md) for containerized deployment
-3. Complete legal compliance research (in progress)
-4. Build and run with Docker Compose:
+**Docker Setup:**
+1. Use [Docker Learning Guide](learnings/docker-guide.md) for containerized deployment
+2. Build and run with Docker Compose:
    ```bash
    docker-compose up --build
    ```

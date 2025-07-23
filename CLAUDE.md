@@ -15,7 +15,16 @@ This is an NLP project using LangChain and Docker to create a locally deployable
 
 ## Environment Setup Prerequisites
 
-### Recommended: WSL2 Setup (Windows Users)
+### Option 1: Native Windows Setup
+For a detailed Windows native installation, see the **[Native Windows Setup section in README.md](README.md#native-windows-setup)** which covers:
+- Python 3.10.9 installation
+- Java JDK 19 installation with Oracle/OpenJDK options
+- Apache Hadoop 3.3.5 with Windows utilities (winutils.exe)
+- PySpark 3.5.2 via pip
+- Complete environment variable configuration (GUI and CLI methods)
+- Full verification steps
+
+### Option 2: WSL2 Setup (Recommended for Windows Users)
 For the best development experience on Windows, use WSL2 (Windows Subsystem for Linux):
 
 **Initial Setup:**
@@ -90,31 +99,6 @@ sudo usermod -aG docker $USER
 # docker --version
 ```
 
-### Alternative: Native Windows Setup
-
-### Core Dependencies (Required)
-- **Python 3.10.9**: Download from [python.org](https://www.python.org/downloads/release/python-3109/)
-- **Java JDK 19**: Download from [Oracle JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) or [OpenJDK](https://jdk.java.net/archive/)
-- **Apache Hadoop 3.3.5**: Download from [Apache Hadoop](https://hadoop.apache.org/releases.html)
-- **Apache Spark 3.5.2**: Included with PySpark installation via pip
-
-### Environment Variables (Windows)
-```cmd
-set JAVA_HOME=C:\Program Files\Java\jdk-19
-set HADOOP_HOME=C:\hadoop\hadoop-3.3.5
-set PYSPARK_HOME=C:\Users\%USERNAME%\spark\spark-3.5.2-bin-hadoop3
-set SPARK_HOME=C:\Users\%USERNAME%\spark\spark-3.5.2-bin-hadoop3
-```
-
-### Path Configuration
-Add to Windows PATH:
-- %JAVA_HOME%\bin
-- %HADOOP_HOME%\bin
-- %SPARK_HOME%\bin
-
-### Optional Tools
-- **Docker Desktop**: [Download for Windows](https://www.docker.com/products/docker-desktop/)
-- **Git**: [Download for Windows](https://git-scm.com/download/win)
 
 ## Project Structure
 ```
